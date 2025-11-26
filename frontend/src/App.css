@@ -1,0 +1,252 @@
+:root {
+  --bg: #0f1724;
+  --card: #071226;
+  --muted: #94a3b8;
+  --accent: #7c3aed;
+}
+body {
+  font-family: Inter, system-ui, sans-serif;
+  margin: 0;
+  height: 100vh;
+  background: var(--bg);
+  color: #e6eef8;
+}
+header {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent);
+}
+header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+header p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  height: calc(100vh - 60px);
+}
+.sidebar {
+  width: 300px;
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-y: auto;
+}
+.sidebar .controls {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+.sidebar input[type='text'] {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #fff;
+}
+.sidebar button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.sidebar .tree {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.meta .small {
+  font-size: 13px;
+  color: var(--muted);
+}
+.graph-container {
+  flex: 1;
+  position: relative;
+}
+#graph {
+  width: 100%;
+  height: 100%;
+}
+/* Chat layout improvements */
+.chat-container {
+  /* make chat area sticky at bottom and keep predictable height */
+  height: 260px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(0,0,0,0.04), transparent);
+}
+#chatMessages {
+  flex: 1 1 auto; /* allow to grow and shrink */
+  overflow-y: auto;
+  padding: 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.06);
+}
+.chat-row {
+  display: flex;
+  max-width: 85%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  word-break: break-word;
+  line-height: 1.3;
+}
+.chat-row.user {
+  align-self: flex-end;
+  background: rgba(124,58,237,0.12);
+  color: #fff;
+}
+.chat-row.ai {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.03);
+  color: #e6eef8;
+}
+.chat-row.system {
+  align-self: center;
+  background: rgba(255,255,255,0.02);
+  color: var(--muted);
+}
+/* make pre/line breaks inside messages look good */
+.chat-row pre {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+}
+/* input area fixed at bottom inside chat container */
+.chat-controls {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid rgba(255,255,255,0.02);
+  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.06));
+}
+.chat-controls input {
+  flex: 1 1 auto;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: var(--card);
+  color: #fff;
+  outline: none;
+}
+.chat-controls input:focus {
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.08);
+}
+.chat-controls button {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.status {
+  padding: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.folder,
+.file {
+  padding: 6px 8px;
+  border-radius: 8px;
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.folder:hover,
+.file:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+.folder .label {
+  font-weight: 600;
+}
+.file .label {
+  font-weight: 500;
+  color: #cfe6ff;
+}
+.file .ext {
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: auto;
+}
+.hidden {
+  display: none;
+}
+.open + .hidden {
+  display: block;
+}
+/* ensure sidebar stays fixed width */
+.container {
+  display: grid;
+  grid-template-columns: 300px 1fr; /* <-- ensure sidebar stays 300px */
+  height: calc(100vh - 60px);
+}
+.graph-container {
+  flex: 1;
+  position: relative;
+  min-height: 360px;
+}
+#graph {
+  width: 100%;
+  height: 100%;
+  min-height: 360px; /* ensure d3 has space */
+}
+/* overlay style for summaries */
+.summary-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.summary-overlay .overlay-card {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 10px;
+  width: 70%;
+  max-height: 80%;
+  overflow: auto;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr; /* stack on small screens */
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  .chat-row {
+    max-width: 95%;
+  }
+}
