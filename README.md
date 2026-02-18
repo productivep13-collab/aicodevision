@@ -34,7 +34,6 @@ GitHub repository URL you want to analyze
 
 Groq API key (for AI features)
 
-<h2>Usage</h2>
 
 Enter Repository URL: Paste any GitHub repository link
 
